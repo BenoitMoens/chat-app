@@ -1,13 +1,13 @@
 import React from 'react';
-import './Contact.css';
+import './ContactList.css';
 
-const Contact = ({contacts}) => {
+const ContactList = ({contacts}) => {
     return (
         contacts.map(contact => 
         <div className="Contact">
-            <img className="avatar" src={contact.avatar} alt={contact.name} />
+            <img className="avatar" src={contact.picture.thumbnail} alt={contact.name} />
             <div>
-                <h4 className="name">{contact.name}</h4>
+                <h4 className="name">{contact.name.first} {contact.name.last}</h4>
                 {contact.status ?
                 <div className="status">
                     <span className="status-online"></span>
@@ -23,4 +23,4 @@ const Contact = ({contacts}) => {
     )
 }
 
-export default Contact;
+export default ContactList;

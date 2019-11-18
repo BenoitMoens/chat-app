@@ -1,27 +1,28 @@
-import React from "react";
-import Contact from "./components/Contact.js";
-import "./App.css";
+import React from 'react';
+import './App.css';
+import ContactList from './components/ContactList/ContactList'
 
-function App() {
-  return (
-    <div className="App">
-      <Contact
-        name="Batman"
-        avatar="https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/batman_hero_avatar_comics-512.png"
-        online
-      />
-      <Contact
-        name="Superman"
-        avatar="https://avatarfiles.alphacoders.com/139/139161.png"
-      />
+class App extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = { 
+      users: []
+    }
+  }
 
-      <Contact
-        name="Ironman"
-        avatar="https://i.pinimg.com/originals/0e/f2/fb/0ef2fb13f53e1a50271b2e3bc2714a0f.jpg"
-        online
-      />
-    </div>
-  );
+  componentDidMount(){
+    fetch("https://randomuser.me/api/?results=5&inc=name,gender,nat, picture&noinfo")
+      .then(response => response.json())
+      .then(data => 
+        this.setState({
+        users: data.results
+      }))
+  }
+  
+  render() {
+    return (
+    <ContactList contacts={this.state.users} />
+    )}
 }
 
 export default App;
